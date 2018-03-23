@@ -1,5 +1,7 @@
 package com.codeclan.models;
 
+import com.codeclan.enums.CategoryType;
+
 import java.util.GregorianCalendar;
 
 public class Advert {
