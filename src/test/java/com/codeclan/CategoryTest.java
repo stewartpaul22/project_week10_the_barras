@@ -26,4 +26,8 @@ public class CategoryTest {
         assertEquals("MOTOR_AND_CARS", category.getCategoryType().toString());
     }
 
+    @Test
+    public void canGetTextDescriptionOfCategory() {
+        assertEquals("Motor & Cars", category.getCategoryType().getDecriptionType());
+    }
 }
