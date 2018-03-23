@@ -1,4 +1,104 @@
 package com.codeclan.models;
 
+import com.codeclan.enums.CategoryType;
+
+import javax.persistence.*;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "adverts")
 public class Advert {
+
+    private int id;
+    private String title;
+    private String description;
+    private double askingPrice;
+    GregorianCalendar startDate;
+    Category category;
+    private Set<User> users;
+
+    public Advert() {
+    }
+
+    public Advert(String title, String description, double askingPrice, GregorianCalendar startDate, Category category) {
+        this.title = title;
+        this.description = description;
+        this.askingPrice = askingPrice;
+        this.startDate = startDate;
+        this.category = category;
+        this.users = new HashSet<User>();
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "price")
+    public double getAskingPrice() {
+        return askingPrice;
+    }
+
+    public void setAskingPrice(double askingPrice) {
+        this.askingPrice = askingPrice;
+    }
+
+    @Column(name = "start_date")
+    public GregorianCalendar getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(GregorianCalendar startDate) {
+        this.startDate = startDate;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "advert_user",
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)}
+    )
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
 }
