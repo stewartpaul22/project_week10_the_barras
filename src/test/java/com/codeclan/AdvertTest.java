@@ -3,6 +3,7 @@ package com.codeclan;
 import com.codeclan.enums.CategoryType;
 import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
+import com.codeclan.models.User;
 import org.junit.Before;
 import org.junit.Test;
 

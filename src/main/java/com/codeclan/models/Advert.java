@@ -2,8 +2,13 @@ package com.codeclan.models;
 
 import com.codeclan.enums.CategoryType;
 
+import javax.persistence.*;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "adverts")
 public class Advert {
 
     private int id;
@@ -12,7 +17,7 @@ public class Advert {
     private double askingPrice;
     GregorianCalendar startDate;
     Category category;
-    User user;
+    private Set<User> users;
 
     public Advert() {
     }
@@ -23,8 +28,12 @@ public class Advert {
         this.askingPrice = askingPrice;
         this.startDate = startDate;
         this.category = category;
+        this.users = new HashSet<User>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -33,6 +42,7 @@ public class Advert {
         this.id = id;
     }
 
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -41,6 +51,7 @@ public class Advert {
         this.title = title;
     }
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -49,6 +60,7 @@ public class Advert {
         this.description = description;
     }
 
+    @Column(name = "price")
     public double getAskingPrice() {
         return askingPrice;
     }
@@ -57,6 +69,7 @@ public class Advert {
         this.askingPrice = askingPrice;
     }
 
+    @Column(name = "start_date")
     public GregorianCalendar getStartDate() {
         return startDate;
     }
@@ -65,6 +78,8 @@ public class Advert {
         this.startDate = startDate;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     public Category getCategory() {
         return category;
     }
@@ -73,11 +88,17 @@ public class Advert {
         this.category = category;
     }
 
-    public User getUser() {
-        return user;
+    @ManyToMany
+    @JoinTable(name = "advert_user",
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)}
+    )
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
+
 }

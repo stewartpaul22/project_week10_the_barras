@@ -1,5 +1,7 @@
 package com.codeclan.db;
 
+import com.codeclan.models.Advert;
+import com.codeclan.models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -58,4 +60,11 @@ public class DBHelper {
             session.close();
         }
     }
+
+    public static void addAdvertToUser(User user, Advert advert) {
+        user.addAdvert(advert);
+        saveOrUpdate(user);
+
+    }
+
 }
