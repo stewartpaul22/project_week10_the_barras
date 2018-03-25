@@ -21,10 +21,13 @@ public class MainController {
         AdvertController advertController = new AdvertController();
         CategoryController categoryController = new CategoryController();
         UserController userController = new UserController();
+        LoginController loginController = new LoginController();
 
         get("/", (req, res) -> {
 
             Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             model.put("template", "templates/main.vtl");
 
             return new ModelAndView(model, "templates/layout.vtl");
