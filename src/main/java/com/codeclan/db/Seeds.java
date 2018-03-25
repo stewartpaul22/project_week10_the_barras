@@ -6,6 +6,7 @@ import com.codeclan.models.Category;
 import com.codeclan.models.User;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Seeds {
 
@@ -24,7 +25,13 @@ public class Seeds {
         Advert advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 03, 10), category);
         DBHelper.saveOrUpdate(advert);
 
+        Advert advert2 = new Advert("Mountain Bike", "For teenagers. Good condition. Will accept offers", 25.00, new GregorianCalendar(2018, 03, 24), category);
+        DBHelper.saveOrUpdate(advert2);
+
         DBHelper.addAdvertToUser(user, advert);
+
+        List<Advert> advertsByCategory = DBHelper.getAdvertByCategory(category);
+
 
 
 
