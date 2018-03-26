@@ -3,14 +3,14 @@ package com.codeclan.controllers;
 import com.codeclan.db.DBHelper;
 import com.codeclan.db.Seeds;
 import com.codeclan.models.Advert;
+import com.codeclan.models.Category;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 import static spark.SparkBase.staticFileLocation;
 
 public class AdvertController {
@@ -37,7 +37,60 @@ public class AdvertController {
 
         }, new VelocityTemplateEngine());
 
+        get("/new", (req, res) -> {
 
+            List<Category> categories = DBHelper.getAll(Category.class);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("template", "templates/adverts/create.vtl");
+            model.put("categories", categories);
+
+            return new ModelAndView(model, "templates/layout.vtl");
+
+        },  new VelocityTemplateEngine());
+
+        post("/", (req, res) -> {
+
+            int categoryId = Integer.parseInt(req.queryParams("category"));
+
+            Category category = DBHelper.find(categoryId, Category.class);
+
+            String title = req.queryParams("title");
+            String description = req.queryParams("description");
+            Double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
+
+            GregorianCalendar today = new GregorianCalendar();
+
+            Advert advert = new Advert(title, description, askingPrice, today, category);
+
+            DBHelper.saveOrUpdate(advert);
+
+            res.redirect("/");
+
+            return null;
+
+        }, new VelocityTemplateEngine());
+
+
+//        post("/engineers", (req, res) -> {
+//
+//            int departmentId = Integer.parseInt(req.queryParams("department"));
+//
+//            Department department = DBHelper.find(departmentId, Department.class);
+//
+//            String firstName = req.queryParams("firstName");
+//            String lastName = req.queryParams("lastName");
+//            int salary = Integer.parseInt(req.queryParams("salary"));
+//
+//            Engineer engineer = new Engineer(firstName, lastName, salary, department);
+//
+//            DBHelper.save(engineer);
+//
+//            res.redirect("/engineers");
+//
+//            return null;
+//
+//        }, new VelocityTemplateEngine());
 
     }
 
