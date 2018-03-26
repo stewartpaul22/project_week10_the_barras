@@ -14,12 +14,14 @@ import static org.junit.Assert.assertEquals;
 public class AdvertTest {
 
     private Advert advert;
+    private Advert advert2;
     private Category category;
 
     @Before
     public void setUp() throws Exception {
         category = new Category(CategoryType.MOTOR_AND_CARS);
-        advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 03, 10), category);
+        advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 3, 10), category);
+        advert2 = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2017, 12, 24), category);
     }
 
     @Test
@@ -39,7 +41,22 @@ public class AdvertTest {
 
     @Test
     public void canGetStartDate() {
-        assertEquals(new GregorianCalendar(2018, 03, 10), advert.getStartDate());
+        assertEquals(new GregorianCalendar(2018, 3, 10), advert.getStartDate());
+    }
+
+    @Test
+    public void canGetMonth() {
+        assertEquals(3, advert.getStartDate().get(GregorianCalendar.MONTH));
+    }
+
+    @Test
+    public void canGetStringDate() {
+        assertEquals("10-3-2018", advert.returnSimpleDateFormat());
+    }
+
+    @Test
+    public void canDisplay12thMonth() {
+        assertEquals("24-12-2017", advert2.returnSimpleDateFormat());
     }
 
     @Test

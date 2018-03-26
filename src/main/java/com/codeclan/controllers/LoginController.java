@@ -18,6 +18,12 @@ public class LoginController {
     }
 
     private void setupEndPoints() {
+        get("/login", (req,res)-> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "templates/login.vtl");
+        }, new VelocityTemplateEngine());
+
+
         post("/login" , (req,res)->{
             String username = req.queryParams("username");
             req.session().attribute("username", username);
@@ -25,10 +31,7 @@ public class LoginController {
             return null;
         }, new VelocityTemplateEngine());
 
-        get("/login", (req,res)-> {
-            Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "templates/login.vtl");
-        }, new VelocityTemplateEngine());
+
 
         get("/logout", (req, res) -> {
             req.session().removeAttribute("username");
