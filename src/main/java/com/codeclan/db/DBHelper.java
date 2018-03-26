@@ -1,6 +1,7 @@
 package com.codeclan.db;
 
 import com.codeclan.models.Advert;
+import com.codeclan.models.Category;
 import com.codeclan.models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -27,6 +28,23 @@ public class DBHelper {
         } finally {
             session.close();
         }
+    }
+
+    public static <T> List<T> getAll(Class classType){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<T> results = null;
+        try {
+            transaction = session.beginTransaction();
+            Criteria cr = session.createCriteria(classType);
+            results = cr.list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
     }
 
     public static <T> void deleteAll(Class classType) {
@@ -65,6 +83,31 @@ public class DBHelper {
         user.addAdvert(advert);
         saveOrUpdate(user);
 
+    }
+
+    public static <T> List<T> getList(Criteria cr) {
+        List<T> results = null;
+        try {
+            transaction = session.beginTransaction();
+            results = cr.list();
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
+    }
+
+    public static List<Advert> getAdvertByCategory(Category category){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Advert> adverts = null;
+        Criteria cr= session.createCriteria(Advert.class);
+        cr.add(Restrictions.eq("category", category));
+        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        adverts = getList(cr);
+        return adverts;
     }
 
 }
