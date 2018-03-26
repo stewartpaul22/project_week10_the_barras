@@ -17,7 +17,20 @@ public class Seeds {
 //        DBHelper.deleteAll(Advert.class);
 
         Category category = new Category(CategoryType.MOTOR_AND_CARS);
+        Category category2 = new Category(CategoryType.FASHION);
+        Category category3= new Category(CategoryType.TECHNOLOGY_AND_ELECTRONICS);
+        Category category4 = new Category(CategoryType.BABY_AND_CHILD);
+        Category category5 = new Category(CategoryType.HOME_AND_GARDEN);
+        Category category6 = new Category(CategoryType.HEALTH_AND_BEAUTY);
+        Category category7 = new Category(CategoryType.OTHER);
         DBHelper.saveOrUpdate(category);
+        DBHelper.saveOrUpdate(category2);
+        DBHelper.saveOrUpdate(category3);
+        DBHelper.saveOrUpdate(category4);
+        DBHelper.saveOrUpdate(category5);
+        DBHelper.saveOrUpdate(category6);
+        DBHelper.saveOrUpdate(category7);
+
 
         User user = new User("Paul");
         DBHelper.saveOrUpdate(user);
@@ -30,6 +43,9 @@ public class Seeds {
 
         Advert advert3 = new Advert("Mountain Bike", "For teenagers. Good condition. Will accept offers", 25.00, new GregorianCalendar(2017, 11, 24), category);
         DBHelper.saveOrUpdate(advert3);
+
+        Advert advert4 = new Advert("Pram", "For babies. Good condition. Will accept offers", 250.00, new GregorianCalendar(2017, 10, 28), category4);
+        DBHelper.saveOrUpdate(advert4);
 
         DBHelper.addAdvertToUser(user, advert);
 
