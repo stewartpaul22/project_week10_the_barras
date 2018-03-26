@@ -28,6 +28,9 @@ public class Seeds {
         Advert advert2 = new Advert("Mountain Bike", "For teenagers. Good condition. Will accept offers", 25.00, new GregorianCalendar(2018, 3, 24), category);
         DBHelper.saveOrUpdate(advert2);
 
+        Advert advert3 = new Advert("Mountain Bike", "For teenagers. Good condition. Will accept offers", 25.00, new GregorianCalendar(2017, 12, 24), category);
+        DBHelper.saveOrUpdate(advert3);
+
         DBHelper.addAdvertToUser(user, advert);
 
         List<Advert> adverts = DBHelper.getAll(Advert.class);
