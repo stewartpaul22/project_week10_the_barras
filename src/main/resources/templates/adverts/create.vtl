@@ -1,0 +1,48 @@
+<p>New Advert</p>
+
+<form action="/" method="post">
+
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title" placeholder="e.g. PS4 80GB" required />
+
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" placeholder="Good condition. Two controllers" required />
+
+    <label for="askingPrice">Asking Price: </label>
+    <input type="number" id="askingPrice" name="askingPrice" required >
+
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        #foreach($category in $categories)
+        <option value="$category.getId()">$category.getCategoryType().getDecriptionType()</option>
+        #end
+    </select>
+
+    <input type="submit" value="Save Advert" >
+
+</form>
+
+
+<!--<p class="pageHeader">New Engineer</p>-->
+
+<!--<form action="/engineers" method="post">-->
+
+    <!--<label for="firstName">First Name: </label>-->
+    <!--<input id="firstName" placeholder="e.g. Paul" class="inputbox" type="text" name="firstName" required >-->
+
+    <!--<label for="lastName">LastName: </label>-->
+    <!--<input id="lastName" placeholder="e.g. Stewart" class="inputbox" type="text" name="lastName" required >-->
+
+    <!--<label for="department">Department:</label>-->
+    <!--<select name="department" id="department">-->
+        <!--#foreach($department in $departments)-->
+        <!--<option value="$department.getId()">$department.getTitle()</option>-->
+        <!--#end-->
+    <!--</select>-->
+
+    <!--<label for="salary">Salary: </label>-->
+    <!--<input id="salary" class="inputbox" type="number" name="salary" required >-->
+
+    <!--<input type="submit" value="Save" class="button" >-->
+
+<!--</form>-->

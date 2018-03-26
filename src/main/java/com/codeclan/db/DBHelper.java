@@ -100,6 +100,29 @@ public class DBHelper {
         return results;
     }
 
+    public static <T> T find(int id, Class classType) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(classType);
+        cr.add(Restrictions.eq("id", id));
+        return getUnique(cr);
+    }
+
+    public static <T> T getUnique(Criteria criteria) {
+        T result = null;
+        try {
+            transaction = session.beginTransaction();
+            result = (T) criteria.uniqueResult();
+            ;
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
     public static List<Advert> getAdvertByCategory(Category category){
         session = HibernateUtil.getSessionFactory().openSession();
         List<Advert> adverts = null;
