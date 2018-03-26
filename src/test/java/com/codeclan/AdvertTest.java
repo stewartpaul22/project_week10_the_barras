@@ -21,7 +21,7 @@ public class AdvertTest {
     public void setUp() throws Exception {
         category = new Category(CategoryType.MOTOR_AND_CARS);
         advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 3, 10), category);
-        advert2 = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2017, 12, 24), category);
+        advert2 = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2017, 11, 24), category);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class AdvertTest {
 
     @Test
     public void canGetStringDate() {
-        assertEquals("10-3-2018", advert.returnSimpleDateFormat());
+        assertEquals("10-4-2018", advert.returnSimpleDateFormat());
     }
 
     @Test
