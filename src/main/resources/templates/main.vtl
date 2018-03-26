@@ -1,1 +1,20 @@
-<h1>main.vtl - placeholder</h1>
+<p>All Adds</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Asking Price</th>
+            <th>Date Added</th>
+        </tr>
+        #foreach($advert in $adverts )
+        <tr>
+            <td>$advert.getTitle()</td>
+            <td>$advert.getDescription()</td>
+            <td>$advert.getAskingPrice()</td>
+            <td>$advert.getStartDate()</td>
+        </tr>
+            #end
+    </table>
+</div>

@@ -3,6 +3,7 @@ package com.codeclan.models;
 import com.codeclan.enums.CategoryType;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -99,6 +100,22 @@ public class Advert {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public String returnSimpleDateFormat() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        simpleDateFormat.setCalendar(this.startDate);
+        String newFormat = simpleDateFormat.format(this.startDate.getTime());
+
+        String[] splitDate = newFormat.split("-");
+        Integer days = Integer.parseInt(splitDate[0]);
+        Integer month = Integer.parseInt(splitDate[1]) -1;
+        Integer year = Integer.parseInt(splitDate[2]);
+
+        String finalDate = days.toString() + "-" + month.toString() + "-" + year.toString();
+
+        return finalDate;
     }
 
 }
