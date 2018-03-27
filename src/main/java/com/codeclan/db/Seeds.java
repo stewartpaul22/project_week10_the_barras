@@ -53,7 +53,7 @@ public class Seeds {
 
         List<Advert> advertsByCategory = DBHelper.getAdvertByCategory(category);
 
-
+        User user2 = DBHelper.findByUsername("Paul", User.class);
 
 
     }

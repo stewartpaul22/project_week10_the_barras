@@ -26,6 +26,8 @@ public class CategoryController {
             List<Category> categories = DBHelper.getAll(Category.class);
 
             Map<String, Object> model = new HashedMap();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             model.put("template", "templates/categories/index.vtl");
             model.put("categories", categories);
 

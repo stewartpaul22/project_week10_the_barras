@@ -4,6 +4,7 @@ import com.codeclan.db.DBHelper;
 import com.codeclan.db.Seeds;
 import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
+import com.codeclan.models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -42,6 +43,8 @@ public class AdvertController {
             List<Category> categories = DBHelper.getAll(Category.class);
 
             Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             model.put("template", "templates/adverts/create.vtl");
             model.put("categories", categories);
 
@@ -55,6 +58,10 @@ public class AdvertController {
 
             Category category = DBHelper.find(categoryId, Category.class);
 
+            Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            //model.put("user", loggedInUser);
+
             String title = req.queryParams("title");
             String description = req.queryParams("description");
             Double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
@@ -64,6 +71,10 @@ public class AdvertController {
             Advert advert = new Advert(title, description, askingPrice, today, category);
 
             DBHelper.saveOrUpdate(advert);
+
+            User user = DBHelper.findByUsername(loggedInUser, User.class);
+
+            DBHelper.addAdvertToUser(user, advert);
 
             res.redirect("/");
 

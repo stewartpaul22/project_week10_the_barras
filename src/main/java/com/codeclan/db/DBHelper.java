@@ -107,6 +107,13 @@ public class DBHelper {
         return getUnique(cr);
     }
 
+    public static <T> T findByUsername(String username, Class classType) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(classType);
+        cr.add(Restrictions.eq("username", username));
+        return getUnique(cr);
+    }
+
     public static <T> T getUnique(Criteria criteria) {
         T result = null;
         try {
