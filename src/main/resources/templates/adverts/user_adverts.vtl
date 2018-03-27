@@ -8,12 +8,12 @@
             <th>Asking Price</th>
             <th>Date Added</th>
         </tr>
-        #foreach($advert in $adverts )
+        #foreach($advert in $adverts)
         <tr>
-            <td>$advert.getTitle()</td>
-            <td>$advert.getDescription()</td>
-            <td>$advert.getAskingPrice()</td>
-            <td>$advert.returnSimpleDateFormat()</td>
+            <td>$advert.get("title")</td>
+            <td>$advert.get("description")</td>
+            <td>$advert.get("price")</td>
+            <td>$advert.get("start_date")</td>
         </tr>
         #end
     </table>

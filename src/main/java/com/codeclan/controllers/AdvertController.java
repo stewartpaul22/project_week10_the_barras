@@ -75,23 +75,28 @@ public class AdvertController {
 
             DBHelper.addAdvertToUser(user, advert);
 
-            res.redirect("/");
+            res.redirect("/myads");
 
             return null;
 
         }, new VelocityTemplateEngine());
 
-//        get("/myads", (req, res) -> {
-//
-//            List<Advert> adverts = DBHelper.getAll(Advert.class);
-//            Map<String, Object> model = new HashMap<>();
-//            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-//            model.put("user", loggedInUser);
-//            model.put("adverts", adverts);
-//            model.put("template", "templates/adverts/index.vtl");
-//
-//
-//        }, new VelocityTemplateEngine());
+        get("/myads", (req, res) -> {
+
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+
+            User user = DBHelper.findByUsername(loggedInUser, User.class);
+
+            List<Advert> adverts = DBHelper.getAdvertByUser(user);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("user", loggedInUser);
+            model.put("template", "templates/adverts/user_adverts.vtl");
+            model.put("adverts", adverts);
+
+            return new ModelAndView(model, "templates/layout.vtl");
+
+        }, new VelocityTemplateEngine());
 
     }
 

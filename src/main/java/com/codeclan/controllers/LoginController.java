@@ -1,5 +1,7 @@
 package com.codeclan.controllers;
 
+import com.codeclan.db.DBHelper;
+import com.codeclan.models.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -30,8 +32,6 @@ public class LoginController {
             res.redirect("/");
             return null;
         }, new VelocityTemplateEngine());
-
-
 
         get("/logout", (req, res) -> {
             req.session().removeAttribute("username");
