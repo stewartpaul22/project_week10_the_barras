@@ -27,7 +27,7 @@ public class LoginController {
 
 
         post("/login" , (req,res)->{
-            String username = req.queryParams("username");
+            String username = (req.queryParams("username")).toLowerCase();
             req.session().attribute("username", username);
             res.redirect("/");
             return null;
