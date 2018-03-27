@@ -8,6 +8,7 @@ import com.codeclan.models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 import static spark.Spark.get;
@@ -28,11 +29,15 @@ public class AdvertController {
         get("/", (req, res) -> {
 
             List<Advert> adverts = DBHelper.getAll(Advert.class);
+
+            DecimalFormat df = new DecimalFormat("#.00");
+
             Map<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             model.put("user", loggedInUser);
             model.put("adverts", adverts);
             model.put("template", "templates/adverts/index.vtl");
+            model.put("df", df);
 
             return new ModelAndView(model, "templates/layout.vtl");
 
@@ -89,10 +94,13 @@ public class AdvertController {
 
             List<Advert> adverts = DBHelper.getAdvertByUser(user);
 
+            DecimalFormat df = new DecimalFormat("#.00");
+
             Map<String, Object> model = new HashMap<>();
             model.put("user", loggedInUser);
             model.put("template", "templates/adverts/user_adverts.vtl");
             model.put("adverts", adverts);
+            model.put("df", df);
 
             return new ModelAndView(model, "templates/layout.vtl");
 
