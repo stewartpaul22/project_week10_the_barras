@@ -81,6 +81,18 @@ public class AdvertController {
 
         }, new VelocityTemplateEngine());
 
+//        get("/user_adverts", (req, res) -> {
+//
+////            List<Advert> adverts = DBHelper.getAll(Advert.class);
+////            Map<String, Object> model = new HashMap<>();
+////            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+////            model.put("user", loggedInUser);
+////            model.put("adverts", adverts);
+////            model.put("template", "templates/adverts/index.vtl");
+//
+//
+//        }, new VelocityTemplateEngine());
+
     }
 
 }

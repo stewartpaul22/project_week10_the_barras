@@ -59,7 +59,9 @@ public class Seeds {
 
         List<Advert> advertsByCategory = DBHelper.getAdvertByCategory(category);
 
-        User user3 = DBHelper.findByUsername("Paul", User.class);
+        List<Advert> advertsByUser = DBHelper.getAdvertByUser(user2);
+
+        User user3 = DBHelper.findByUsername("paul", User.class);
 
 
     }
