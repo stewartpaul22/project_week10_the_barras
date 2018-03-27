@@ -117,8 +117,6 @@ public class DBHelper {
         String hql = "select adverts.* from adverts join advert_user on adverts.id = advert_user.advert_id join users on users.id = advert_user.user_id where users.id = :userId";
         SQLQuery query = session.createSQLQuery(hql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        //query.setResultTransformer(Transformers.aliasToBean(Advert.class));
-
 
         query.setInteger("userId", userId);
 
@@ -126,17 +124,6 @@ public class DBHelper {
 
         return adverts;
     }
-
-
-//    public static List<Advert> getAdvertByUser(User user){
-//        session = HibernateUtil.getSessionFactory().openSession();
-//        List<Advert> adverts = null;
-//        Criteria cr= session.createCriteria(Advert.class);
-//        cr.add(Restrictions.eq("user", user));
-//        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-//        adverts = getList(cr);
-//        return adverts;
-//    }
 
     public static <T> List<T> getList(Criteria cr) {
         List<T> results = null;
