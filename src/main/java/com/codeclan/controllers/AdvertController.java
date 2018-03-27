@@ -60,7 +60,6 @@ public class AdvertController {
 
             Map<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
-            //model.put("user", loggedInUser);
 
             String title = req.queryParams("title");
             String description = req.queryParams("description");
@@ -82,31 +81,6 @@ public class AdvertController {
 
         }, new VelocityTemplateEngine());
 
-
-//        post("/engineers", (req, res) -> {
-//
-//            int departmentId = Integer.parseInt(req.queryParams("department"));
-//
-//            Department department = DBHelper.find(departmentId, Department.class);
-//
-//            String firstName = req.queryParams("firstName");
-//            String lastName = req.queryParams("lastName");
-//            int salary = Integer.parseInt(req.queryParams("salary"));
-//
-//            Engineer engineer = new Engineer(firstName, lastName, salary, department);
-//
-//            DBHelper.save(engineer);
-//
-//            res.redirect("/engineers");
-//
-//            return null;
-//
-//        }, new VelocityTemplateEngine());
-
     }
-
-
-
-
 
 }
