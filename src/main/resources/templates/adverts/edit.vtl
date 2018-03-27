@@ -1,0 +1,27 @@
+<p class="pageHeader">Edit My Advert</p>
+
+<form action="/myads/$advert.getId()" method="post">
+
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title" placeholder="e.g. PS4 80GB" required value="$advert.getTitle()" />
+
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" placeholder="Good condition. Two controllers" required value="$advert.getDescription()"/>
+
+    <label for="askingPrice">Asking Price: </label>
+    <input type="text" id="askingPrice" name="askingPrice" required value="$df.format($advert.getAskingPrice())" >
+
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        #foreach($category in $categories)
+        <option value="$category.getId()"
+        #if($category.getId() == $advert.getCategory().getId())
+                selected="selected"
+                #end
+        >$category.getCategoryType().getDecriptionType()</option>
+        #end
+    </select>
+
+    <input type="submit" value="Save" class="button">
+</form>
+<a href="/myads" class="button center">Cancel</a>

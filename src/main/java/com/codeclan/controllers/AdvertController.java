@@ -106,6 +106,63 @@ public class AdvertController {
 
         }, new VelocityTemplateEngine());
 
+        ////////////////////////////////////////
+
+        post("/myads/:id/delete", (req, res)->{
+            int id = Integer.parseInt(req.params(":id"));
+            Advert advertToDelete = DBHelper.find(id,Advert.class);
+            DBHelper.delete(advertToDelete);
+            res.redirect("/myads");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        get("/myads/:id/edit", (req, res) ->{
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+
+            DecimalFormat df = new DecimalFormat("#.00");
+
+            Advert advert = DBHelper.find(intId, Advert.class);
+            List<Category> categories = DBHelper.getAll(Category.class);
+            Map<String, Object> model = new HashMap();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
+            model.put("categories", categories);
+            model.put("template", "templates/adverts/edit.vtl");
+            model.put("advert", advert);
+            model.put("df", df);
+
+            return new ModelAndView(model, "templates/layout.vtl");
+
+        }, new VelocityTemplateEngine());
+
+        post("/myads/:id", (req, res) -> {
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+            Advert advert = DBHelper.find(intId, Advert.class);
+            int categoryId = Integer.parseInt(req.queryParams("category"));
+            Category category = DBHelper.find(categoryId,Category.class);
+            String title = req.queryParams("title");
+            String description = req.queryParams("description");
+            double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
+
+            advert.setTitle(title);
+            advert.setDescription(description);
+            advert.setAskingPrice(askingPrice);
+            advert.setCategory(category);
+            DBHelper.saveOrUpdate(advert);
+            res.redirect("/myads");
+            return null;
+
+        }, new VelocityTemplateEngine());
+
+
+
+
+
+
+
+
     }
 
 }
