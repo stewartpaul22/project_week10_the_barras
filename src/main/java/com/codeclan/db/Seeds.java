@@ -54,14 +54,17 @@ public class Seeds {
         DBHelper.addAdvertToUser(user2, advert3);
         DBHelper.addAdvertToUser(user2, advert4);
 
+        List<User> userList = DBHelper.getAll(User.class);
 
         List<Advert> adverts = DBHelper.getAll(Advert.class);
 
         List<Advert> advertsByCategory = DBHelper.getAdvertByCategory(category);
 
-        List<Advert> advertsByUser = DBHelper.getAdvertByUser(user2);
-
         User user3 = DBHelper.findByUsername("paul", User.class);
+
+        List<Advert> listAds = DBHelper.getAdvertByUser(user2);
+
+
 
 
     }

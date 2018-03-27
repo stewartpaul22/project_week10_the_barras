@@ -3,10 +3,7 @@ package com.codeclan.db;
 import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
 import com.codeclan.models.User;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -36,6 +33,7 @@ public class DBHelper {
         try {
             transaction = session.beginTransaction();
             Criteria cr = session.createCriteria(classType);
+            cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             results = cr.list();
             transaction.commit();
         } catch (HibernateException e) {
@@ -110,13 +108,32 @@ public class DBHelper {
 
     public static List<Advert> getAdvertByUser(User user){
         session = HibernateUtil.getSessionFactory().openSession();
+
+        int userId = user.getId();
+
         List<Advert> adverts = null;
-        Criteria cr= session.createCriteria(Advert.class);
-        cr.add(Restrictions.eq("users", user));
-        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        adverts = getList(cr);
+
+        String hql = "select * from adverts join advert_user on adverts.id = advert_user.advert_id join users on users.id = advert_user.user_id where users.id = :userId";
+        SQLQuery query = session.createSQLQuery(hql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+
+        query.setInteger("userId", userId);
+
+        adverts = query.list();
+
         return adverts;
     }
+
+
+//    public static List<Advert> getAdvertByUser(User user){
+//        session = HibernateUtil.getSessionFactory().openSession();
+//        List<Advert> adverts = null;
+//        Criteria cr= session.createCriteria(Advert.class);
+//        cr.add(Restrictions.eq("user", user));
+//        cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//        adverts = getList(cr);
+//        return adverts;
+//    }
 
     public static <T> List<T> getList(Criteria cr) {
         List<T> results = null;
