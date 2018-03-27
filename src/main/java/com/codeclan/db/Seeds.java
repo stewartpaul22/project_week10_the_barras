@@ -32,8 +32,10 @@ public class Seeds {
         DBHelper.saveOrUpdate(category7);
 
 
-        User user = new User("Paul");
+        User user = new User("paul");
         DBHelper.saveOrUpdate(user);
+        User user2 = new User("ria");
+        DBHelper.saveOrUpdate(user2);
 
         Advert advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 3, 10), category);
         DBHelper.saveOrUpdate(advert);
@@ -48,10 +50,20 @@ public class Seeds {
         DBHelper.saveOrUpdate(advert4);
 
         DBHelper.addAdvertToUser(user, advert);
+        DBHelper.addAdvertToUser(user, advert2);
+        DBHelper.addAdvertToUser(user2, advert3);
+        DBHelper.addAdvertToUser(user2, advert4);
+
+        List<User> userList = DBHelper.getAll(User.class);
 
         List<Advert> adverts = DBHelper.getAll(Advert.class);
 
         List<Advert> advertsByCategory = DBHelper.getAdvertByCategory(category);
+
+        User user3 = DBHelper.findByUsername("paul", User.class);
+
+        List<Advert> listAds = DBHelper.getAdvertByUser(user2);
+
 
 
 

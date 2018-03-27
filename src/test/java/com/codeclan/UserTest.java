@@ -1,5 +1,6 @@
 package com.codeclan;
 
+import com.codeclan.db.DBHelper;
 import com.codeclan.models.User;
 import org.junit.Before;
 import org.junit.Test;

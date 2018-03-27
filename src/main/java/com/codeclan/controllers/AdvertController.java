@@ -4,6 +4,7 @@ import com.codeclan.db.DBHelper;
 import com.codeclan.db.Seeds;
 import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
+import com.codeclan.models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -42,6 +43,8 @@ public class AdvertController {
             List<Category> categories = DBHelper.getAll(Category.class);
 
             Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             model.put("template", "templates/adverts/create.vtl");
             model.put("categories", categories);
 
@@ -55,6 +58,9 @@ public class AdvertController {
 
             Category category = DBHelper.find(categoryId, Category.class);
 
+            Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+
             String title = req.queryParams("title");
             String description = req.queryParams("description");
             Double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
@@ -65,37 +71,33 @@ public class AdvertController {
 
             DBHelper.saveOrUpdate(advert);
 
-            res.redirect("/");
+            User user = DBHelper.findByUsername(loggedInUser, User.class);
+
+            DBHelper.addAdvertToUser(user, advert);
+
+            res.redirect("/myads");
 
             return null;
 
         }, new VelocityTemplateEngine());
 
+        get("/myads", (req, res) -> {
 
-//        post("/engineers", (req, res) -> {
-//
-//            int departmentId = Integer.parseInt(req.queryParams("department"));
-//
-//            Department department = DBHelper.find(departmentId, Department.class);
-//
-//            String firstName = req.queryParams("firstName");
-//            String lastName = req.queryParams("lastName");
-//            int salary = Integer.parseInt(req.queryParams("salary"));
-//
-//            Engineer engineer = new Engineer(firstName, lastName, salary, department);
-//
-//            DBHelper.save(engineer);
-//
-//            res.redirect("/engineers");
-//
-//            return null;
-//
-//        }, new VelocityTemplateEngine());
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+
+            User user = DBHelper.findByUsername(loggedInUser, User.class);
+
+            List<Advert> adverts = DBHelper.getAdvertByUser(user);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("user", loggedInUser);
+            model.put("template", "templates/adverts/user_adverts.vtl");
+            model.put("adverts", adverts);
+
+            return new ModelAndView(model, "templates/layout.vtl");
+
+        }, new VelocityTemplateEngine());
 
     }
-
-
-
-
 
 }

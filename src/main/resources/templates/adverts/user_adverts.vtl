@@ -1,0 +1,20 @@
+<p>$user Adverts</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Asking Price</th>
+            <th>Date Added</th>
+        </tr>
+        #foreach($advert in $adverts)
+        <tr>
+            <td>$advert.get("title")</td>
+            <td>$advert.get("description")</td>
+            <td>$advert.get("price")</td>
+            <td>$advert.get("start_date")</td>
+        </tr>
+        #end
+    </table>
+</div>

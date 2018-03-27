@@ -89,7 +89,7 @@ public class Advert {
         this.category = category;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "advert_user",
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)}
