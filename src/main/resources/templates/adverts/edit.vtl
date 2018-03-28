@@ -12,7 +12,7 @@
     <input type="text" id="askingPrice" name="askingPrice" required value="$df.format($advert.getAskingPrice())" >
 
     <label for="category">Category</label>
-    <select name="category" id="category">
+    <select name="category" id="category" class="inline">
         #foreach($category in $categories)
         <option value="$category.getId()"
         #if($category.getId() == $advert.getCategory().getId())
@@ -23,5 +23,5 @@
     </select>
 
     <input type="submit" value="Save" class="button">
+    <a href="/myads" class="button">Cancel</a>
 </form>
-<a href="/myads" class="button center">Cancel</a>

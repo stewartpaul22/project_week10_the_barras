@@ -33,6 +33,7 @@ public class LoginController {
             String status = "hidden";
             String status1 = "hidden";
             String message = "";
+            String alert = "";
 
             Map<String, Object> model = new HashMap<>();
             model.put("status", status);
@@ -55,8 +56,11 @@ public class LoginController {
                 res.redirect("/");
             }else{
                 status = "";
+                alert = "red";
                 model.put("status", status);
+                model.put("alert", alert);
                 message = "You need to register first";
+                //red alert
                 model.put("message", message);
                 return new ModelAndView(model,"templates/login.vtl");
             }
@@ -69,6 +73,7 @@ public class LoginController {
             String status1 = "hidden";
             String status = "hidden";
             String message1 = "";
+            String alert = "";
 
             String newUsername = (req.queryParams("newUsername")).toLowerCase();
             req.session().attribute("newUsername", newUsername);
@@ -90,16 +95,22 @@ public class LoginController {
                 registeredUserList.clear();
                 //User already registered
                 status1 = "";
+                alert = "red";
                 model.put("status1", status1);
+                model.put("alert", alert);
                 message1 = "Username already taken";
+                //red alert
                 model.put("message1", message1);
                 status = "hidden";
                 model.put("status", status);
             }else{
                 DBHelper.saveOrUpdate(user);
                 status1 = "";
+                alert = "green";
                 model.put("status1", status1);
+                model.put("alert", alert);
                 message1 = "You can now login";
+                //green alert
                 model.put("message1", message1);
                 status = "hidden";
                 model.put("status", status);

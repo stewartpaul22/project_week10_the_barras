@@ -12,12 +12,12 @@
     <input type="text" id="askingPrice" name="askingPrice" step="any" required >
 
     <label for="category">Category</label>
-    <select name="category" id="category">
+    <select name="category" id="category" class="inline">
         #foreach($category in $categories)
         <option value="$category.getId()">$category.getCategoryType().getDecriptionType()</option>
         #end
     </select>
 
-    <input type="submit" value="Save Advert" >
+    <input type="submit" value="Save Advert" class="button" >
 
 </form>
