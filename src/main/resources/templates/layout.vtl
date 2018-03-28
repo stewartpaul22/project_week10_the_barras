@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<p>Logged in as: $user <a href="/logout">Logout</a> </p>
+<logo><h1>The Barras Online</h1></logo>
     <div class="container">
+        <div>
         <nav>
             <ul>
                 <li><a href="/" class="button center">All Ads</a></li>
@@ -20,7 +21,11 @@
                 <li><a href="/new" class="button center">Add</a></li>
             </ul>
         </nav>
-    #parse($template)
+            <p class="postLoginDisplay">Logged in as: $user <a href="/logout">Logout</a> </p>
+        </div>
+        <div class="template">
+        #parse($template)
+        </div>
     </div>
 </body>
 </html>
