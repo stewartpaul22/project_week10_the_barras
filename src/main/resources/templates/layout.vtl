@@ -5,8 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>The Barras Online</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    </body>
+<logo><h1>The Barras Online</h1></logo>
+    <div class="container">
+        <div>
+        <nav>
+            <ul>
+                <li><a href="/">All Ads</a></li>
+                <li><a href="/bycategory">By Category</a></li>
+                <li><a href="/myads">My Ads</a></li>
+                <li><a href="/new">Add</a></li>
+            </ul>
+        </nav>
+            <p class="postLoginDisplay">Logged in as: <span class="userStyle"> $user</span> <a href="/logout" class="logoutSytle">Logout</a> </p>
+        </div>
+        <div class="template">
+        #parse($template)
+        </div>
+    </div>
+</body>
 </html>

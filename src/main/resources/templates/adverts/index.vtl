@@ -1,0 +1,20 @@
+<p class="pageBox">All Adds</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Asking Price</th>
+            <th>Date Added</th>
+        </tr>
+        #foreach($advert in $adverts )
+        <tr>
+            <td class="LimitTitle">$advert.getTitle()</td>
+            <td class="limitDescription">$advert.getDescription()</td>
+            <td>£$df.format($advert.getAskingPrice())</td>
+            <td>$advert.returnSimpleDateFormat()</td>
+        </tr>
+        #end
+    </table>
+</div>

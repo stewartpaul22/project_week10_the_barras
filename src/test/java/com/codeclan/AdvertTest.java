@@ -1,5 +1,6 @@
 package com.codeclan;
 
+import com.codeclan.db.DBHelper;
 import com.codeclan.enums.CategoryType;
 import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
@@ -8,18 +9,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class AdvertTest {
 
     private Advert advert;
+    private Advert advert2;
     private Category category;
+    private Category category2;
 
     @Before
     public void setUp() throws Exception {
         category = new Category(CategoryType.MOTOR_AND_CARS);
-        advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 03, 10), category);
+        category2 = new Category(CategoryType.TECHNOLOGY_AND_ELECTRONICS);
+        advert = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2018, 3, 10), category);
+        advert2 = new Advert("Raleigh Striker Bike", "1984 Raleigh Striker for sale. Good condition. Will accept offers", 100.00, new GregorianCalendar(2017, 11, 24), category);
     }
 
     @Test
@@ -39,11 +45,27 @@ public class AdvertTest {
 
     @Test
     public void canGetStartDate() {
-        assertEquals(new GregorianCalendar(2018, 03, 10), advert.getStartDate());
+        assertEquals(new GregorianCalendar(2018, 3, 10), advert.getStartDate());
+    }
+
+    @Test
+    public void canGetMonth() {
+        assertEquals(3, advert.getStartDate().get(GregorianCalendar.MONTH));
+    }
+
+    @Test
+    public void canGetStringDate() {
+        assertEquals("10-4-2018", advert.returnSimpleDateFormat());
+    }
+
+    @Test
+    public void canDisplay12thMonth() {
+        assertEquals("24-12-2017", advert2.returnSimpleDateFormat());
     }
 
     @Test
     public void canGetCategoryType() {
         assertEquals(CategoryType.MOTOR_AND_CARS, advert.getCategory().getCategoryType());
     }
+
 }

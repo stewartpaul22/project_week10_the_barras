@@ -1,0 +1,22 @@
+<p class="pageBox">$user's Adverts</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Asking Price</th>
+            <th></th>
+        </tr>
+        #foreach($advert in $adverts)
+        <tr>
+            <td class="LimitTitle">$advert.get("title")</td>
+            <td class="limitDescription">$advert.get("description")</td>
+            <td>£$df.format($advert.get("price"))</td>
+            <td><form action="/myads/$advert.get('id')/delete" method="post"><input type="submit" value="Delete" class="button center">
+                <a href="/myads/$advert.get('id')/edit" class="button">Edit</a>
+            </form></td>
+        </tr>
+        #end
+    </table>
+</div>

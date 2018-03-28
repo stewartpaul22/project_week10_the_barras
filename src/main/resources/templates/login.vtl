@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Barras Online</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<logo><h1>The Barras Online</h1></logo>
+<div class="container">
+
+<form classs="" action="/login" method="post">
+    <label for="username">Your Username:</label>
+    <input id="username" name="username" type="text" required/>
+    <input type="submit" class="button" value="Login">
+
+</form>
+<p $status class="$alert">$message</p>
+
+<form action="/login/addUser" method="post">
+    <label for="newUsername">Add Username</label>
+    <input id="newUsername" name="newUsername" type="text" required/>
+    <input type="submit" class="button" value="Register">
+</form>
+
+<p $status1 class="$alert">$message1</p>
+
+</div>
+
+</body>
+</html>
