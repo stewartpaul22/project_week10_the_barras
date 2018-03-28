@@ -108,7 +108,6 @@ public class Advert {
         simpleDateFormat.setCalendar(this.startDate);
         String newFormat = simpleDateFormat.format(this.startDate.getTime());
 
-
         String[] splitDate = newFormat.split("-");
         Integer days = Integer.parseInt(splitDate[0]);
         Integer month = Integer.parseInt(splitDate[1]);
