@@ -161,6 +161,15 @@ a.logoutSytle:hover, a.logoutSytle:active {
     color:green;
 }
 
+.footer{
+  font-size: 10px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+}
+
 
 /* ----  Media queries  ----- */
 
@@ -264,5 +273,9 @@ a.logoutSytle:hover, a.logoutSytle:active {
     .LimitTitle {
           width: 20%;
         }
+
+    .footer{
+       text-align: center;
+    }
 
 }
