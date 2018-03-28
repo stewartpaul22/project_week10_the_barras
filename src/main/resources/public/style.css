@@ -50,6 +50,7 @@ table {
 body {
     color: #111;
     background-color: #ccc;
+    font-family:Arial;
 }
 
 /* ----------------------------------- */
@@ -101,6 +102,64 @@ li a:hover {
 }
 
 
+table {
+     margin: auto;
+     width: 100%;
+     text-align: center;
+     font-size: .9em;
+}
+
+th {
+     font-weight: bold;
+}
+
+th, td {
+     padding: 7px 5px;
+     border-bottom: 1px solid #ddd;
+}
+
+tr {
+     background-color: #DCDCDC;
+}
+
+tr:nth-child(even) {
+     background-color: #F0F0F0;
+}
+
+.postLoginDisplay{
+     font-style: oblique;
+}
+
+.userStyle{
+    font-weight:bold;
+}
+
+a.logoutSytle:link, a.logoutSytle:visited {
+    color: grey;
+    text-decoration:none;
+}
+a.logoutSytle:hover, a.logoutSytle:active {
+    text-decoration: underline;
+}
+
+.button{
+     background-color: #27D1CB;
+     border: 1px solid #888;
+     color: white;
+     padding: 4px 10px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+     font-size: .9em;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color:green;
+}
 
 
 /* ----  Media queries  ----- */
@@ -197,4 +256,13 @@ li a:hover {
     input[type=submit]:hover {
       box-shadow: 5px 5px 12px grey;
     }
+
+    .limitDescription {
+      width: 30%;
+    }
+
+    .LimitTitle {
+          width: 20%;
+        }
+
 }

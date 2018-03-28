@@ -10,8 +10,8 @@
         </tr>
         #foreach($advert in $adverts )
         <tr>
-            <td>$advert.getTitle()</td>
-            <td>$advert.getDescription()</td>
+            <td class="LimitTitle">$advert.getTitle()</td>
+            <td class="limitDescription">$advert.getDescription()</td>
             <td>£$df.format($advert.getAskingPrice())</td>
             <td>$advert.returnSimpleDateFormat()</td>
         </tr>
