@@ -170,6 +170,14 @@ a.logoutSytle:hover, a.logoutSytle:active {
   text-align: left;
 }
 
+.loginBackImage{
+    background-image:url('/images/barras-background-image.jpg');
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-size:100% 700px;
+    }
+
+
 
 /* ----  Media queries  ----- */
 
@@ -180,6 +188,10 @@ a.logoutSytle:hover, a.logoutSytle:active {
         width: 100%;
         text-align: center;
     }
+
+     .loginBackImage{
+         background-size:100% 800px;
+     }
 
     .template {
     margin: auto;
@@ -273,6 +285,7 @@ a.logoutSytle:hover, a.logoutSytle:active {
     .LimitTitle {
           width: 20%;
         }
+
 
     .footer{
        text-align: center;
