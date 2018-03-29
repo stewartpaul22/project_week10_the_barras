@@ -13,11 +13,15 @@ import java.util.*;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
 public class AdvertController {
 
     public static void main(String[] args) {
+
+        port(getHerokuAssignedPort());
+
         Seeds.seedData();
 
         staticFileLocation("/public");
@@ -156,13 +160,14 @@ public class AdvertController {
 
         }, new VelocityTemplateEngine());
 
+    }
 
-
-
-
-
-
-
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
     }
 
 }

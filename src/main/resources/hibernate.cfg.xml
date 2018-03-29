@@ -11,9 +11,10 @@
         <!--<property name="hibernate.connection.password"></property>-->
 
         <!--Change dbname as appropariate-->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/barrasdb</property>
+        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/barrasdb</property>-->
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-174-129-206-173.compute-1.amazonaws.com/d27q31gcieu0gf?user=quazlxnsvprdhz&amp;password=f401ea603cc055e33a1ea05b6df6d2d46b3b35d6ace19b5022637cb69ac4c635</property>
         <property name="connection_pool_size">1</property>
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">create</property>
         <property name="show_sql">true</property>
 
         <mapping class = "com.codeclan.models.User"/>
