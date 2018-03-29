@@ -5,8 +5,13 @@ import com.codeclan.models.Category;
 import com.codeclan.models.User;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.hibernate.transform.Transformers;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DBHelper {
@@ -26,6 +31,76 @@ public class DBHelper {
         } finally {
             session.close();
         }
+    }
+
+    public static void saveOrUpdateAdvert(Advert advert) {
+
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+
+            advert.setProductImage(BlobProxy.generateProxy(getImage()));
+
+            session.saveOrUpdate(advert);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public static byte[] getImage() {
+        File file =new File("/Users/paulstewart/Desktop/cube.jpg");
+        if(file.exists()){
+            try {
+                BufferedImage bufferedImage= ImageIO.read(file);
+                ByteArrayOutputStream byteOutStream=new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "jpg", byteOutStream);
+                return byteOutStream.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static Advert loadAdvert(Advert advert) throws SQLException {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Advert results = null;
+        try {
+            transaction = session.beginTransaction();
+
+            advert = (Advert) session.get(Advert.class, 1);
+            System.out.println("Product Name: " + advert.getTitle());
+
+            InputStream imgStream = advert.getProductImage().getBinaryStream();
+            saveImage(imgStream);
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
+    }
+
+    public static String saveImage(InputStream stream) {
+        File file = new File("/Users/paulstewart/Desktop/cube_copy.jpg");
+        String filepath;
+        try(FileOutputStream outputStream = new FileOutputStream(file)) {
+            BufferedImage bufferedImage = ImageIO.read(stream);
+            ImageIO.write(bufferedImage, "jpg", outputStream);
+            System.out.println("Image file location: " + file.getCanonicalPath());
+            filepath = file.getCanonicalPath();
+            return filepath;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static <T> List<T> getAll(Class classType){

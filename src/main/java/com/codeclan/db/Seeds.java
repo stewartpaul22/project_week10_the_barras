@@ -5,12 +5,13 @@ import com.codeclan.models.Advert;
 import com.codeclan.models.Category;
 import com.codeclan.models.User;
 
+import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Seeds {
 
-    public static void seedData() {
+    public static void seedData() throws SQLException {
 
 //        DBHelper.deleteAll(Category.class);
 //        DBHelper.deleteAll(User.class);
@@ -53,6 +54,9 @@ public class Seeds {
         DBHelper.addAdvertToUser(user, advert2);
         DBHelper.addAdvertToUser(user2, advert3);
         DBHelper.addAdvertToUser(user2, advert4);
+
+        DBHelper.saveOrUpdateAdvert(advert);
+        Advert returnedAdvert = DBHelper.loadAdvert(advert);
 
         List<User> userList = DBHelper.getAll(User.class);
 

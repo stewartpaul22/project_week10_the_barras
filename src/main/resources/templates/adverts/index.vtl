@@ -10,6 +10,7 @@
         </tr>
         #foreach($advert in $adverts )
         <tr>
+            <!--<td><img src="$advert.getImagePath()"></td>-->
             <td class="LimitTitle">$advert.getTitle()</td>
             <td class="limitDescription">$advert.getDescription()</td>
             <td>£$df.format($advert.getAskingPrice())</td>

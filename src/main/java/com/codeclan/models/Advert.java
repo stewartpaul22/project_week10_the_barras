@@ -3,6 +3,7 @@ package com.codeclan.models;
 import com.codeclan.enums.CategoryType;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ public class Advert {
     GregorianCalendar startDate;
     Category category;
     private Set<User> users;
+    private Blob productImage;
 
     public Advert() {
     }
@@ -41,6 +43,15 @@ public class Advert {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Column(name = "product_image")
+    public Blob getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(Blob productImage) {
+        this.productImage = productImage;
     }
 
     @Column(name = "title")

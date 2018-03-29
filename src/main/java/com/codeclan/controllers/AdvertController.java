@@ -8,6 +8,7 @@ import com.codeclan.models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -17,7 +18,7 @@ import static spark.SparkBase.staticFileLocation;
 
 public class AdvertController {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Seeds.seedData();
 
         staticFileLocation("/public");
