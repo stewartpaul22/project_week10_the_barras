@@ -19,4 +19,4 @@ Users should be able to:
 
 ### View app at:
 
-barras-project.herokuapp.com
+https://barras-project.herokuapp.com/
