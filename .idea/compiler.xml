@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="barras-project" />
         <module name="my_new_project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="barras-project" target="1.8" />
       <module name="my_new_project" target="1.8" />
     </bytecodeTargetLevel>
   </component>
